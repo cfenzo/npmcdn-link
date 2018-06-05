@@ -1,5 +1,10 @@
 const addPackageHeader = () => {
-    // Don't inject if already injected
+    // Abort if not on a package url
+    if(location.pathname.indexOf("/package/") !== 0){
+        return;
+    }
+    
+    // Abort if already injected
     if(document.querySelector("[data-npmcdnlink]")){
         return;
     }
@@ -10,7 +15,7 @@ const addPackageHeader = () => {
         const packageName = packageHeader.textContent;
         const cdnUri = `https://unpkg.com/${packageName}/`;
 
-        // insert adjacent to h1
+        // Insert adjacent to h1
         packageHeader.insertAdjacentHTML('afterend', `<p data-npmcdnlink><a href="${cdnUri}">View on unpkg</a></p>`);
     }
 }
@@ -22,7 +27,7 @@ if(MutationObserver) {
     // Use MutationObserver to detect tab/page navigation
     const observer = new MutationObserver(addPackageHeader);
     observer.observe(
-        document.querySelector("[data-reactroot] #top"),
+        document.querySelector("[data-reactroot]"),
         {
             childList: true,
             subtree: true
@@ -31,8 +36,8 @@ if(MutationObserver) {
 } else {
 
     // Use Mutation events to detect tab/page navigation
-    document.querySelector("[data-reactroot] #top").addEventListener("DOMSubtreeModified", addPackageHeader);
+    document.querySelector("[data-reactroot]").addEventListener("DOMSubtreeModified", addPackageHeader);
 }
 
-// initial
+// Initial
 addPackageHeader();
