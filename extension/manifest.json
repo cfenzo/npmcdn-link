@@ -1,17 +1,17 @@
 {
     "name": "unpkg Link",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "Adds a link to unpkg.com for packages on npmjs.org",
     "homepage_url": "https://github.com/DrewML/unpkg-link",
     "manifest_version": 2,
     "minimum_chrome_version": "49",
     "permissions": [
-        "https://www.npmjs.com/package/*"
+        "https://www.npmjs.com/*"
     ],
     "content_scripts": [
         {
             "run_at": "document_idle",
-            "matches": ["https://www.npmjs.com/package/*"],
+            "matches": ["https://www.npmjs.com/*"],
             "js": ["index.js"]
         }
     ]
