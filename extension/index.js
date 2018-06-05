@@ -10,13 +10,13 @@ const addPackageHeader = () => {
     }
 
     // The best location for the unpkg link ?
-    const packageHeader = document.querySelector('main h1');
+    const packageHeader = document.querySelector('main h2');
     if(packageHeader){
-        const packageName = packageHeader.textContent;
+        const packageName = packageHeader.querySelector("span").textContent;
         const cdnUri = `https://unpkg.com/${packageName}/`;
 
         // Insert adjacent to h1
-        packageHeader.insertAdjacentHTML('afterend', `<p data-npmcdnlink><a href="${cdnUri}">View on unpkg</a></p>`);
+        packageHeader.insertAdjacentHTML('afterend', `<p data-npmcdnlink style="padding-left: 1em;"><a href="${cdnUri}">View on unpkg</a></p>`);
     }
 }
 
